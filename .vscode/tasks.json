@@ -1,0 +1,66 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            //.c컴파일 해서 해당 파일명과 이름이 같은 .exe 만들기
+
+            //type : 해당 작업을 프로세스로 진행할건지(process), 셸에서 진행할건지(shell) 정함.
+            //label : 해당 작업을 알아볼 수 있도록 이름을 붙여주는 것
+            //command : 명령어의 맨 첫 명령어(?)
+            //args : 명령어 뒤에 붙는 친구들~
+            //problemMatcher : 컴파일 하면서 나느 에러를 볼 수 있도록 함.
+            //group : 작업을 특정 그룹에 속하도록 함. 그룹은 크게 (build, test, none)으로 정해져 있음
+            //        isDefault는 기본작업 그룹에 해당 task가 속할 것인지 물어봄
+            "type": "shell",
+            "label": "gcc.exe build active file",
+            "command": "gcc",
+            "args":[
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "problemMatcher":[
+                "$gcc"
+            ],
+            "group":{
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        
+        {
+            //.cpp 컴파일 해서 해당 파일명과 이름이 같은 .exe 만들기
+            "type": "shell",
+            "label": "g++.exe build active file",
+            "command": "g++",
+            "args":[
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "problemMatcher":[
+                "$gcc"
+            ],
+            "group":{
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+
+        {
+            //현재 명령어르 실행하는 .c .cpp 파일과 파일명이 같은 .exe 파일 실행하기
+            "type": "shell",
+            "label": "Run",
+            "command": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+            "problemMatcher":[
+                "$gcc"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        }
+    ]
+}
